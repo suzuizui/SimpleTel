@@ -32,7 +32,7 @@ public class ChannelCache {
         return group.flush();
     }
 
-    public static boolean discard(Channel channel) {
+    public static boolean remove(Channel channel) {
         return group.remove(channel);
     }
 

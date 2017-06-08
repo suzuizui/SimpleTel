@@ -13,16 +13,8 @@ public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
     private Result result;
     private int code;
-    private String message;
     private String data;
 
-    public String getMessage() {
-        return this.message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public Message() {
     }
@@ -32,27 +24,19 @@ public class Message implements Serializable {
         this.code = code;
     }
 
-    public Message(Result result, Integer code, String message) {
+    public Message(Result result, Integer code) {
         this.result = result;
         this.code = code.intValue();
-        this.message = message;
-    }
-
-    public Message(Result result, int code, String message, String data) {
-        this.result = result;
-        this.code = code;
-        this.message = message;
-        this.data = data;
-    }
-
-    public Message(Result result, String data) {
-        this.result = result;
-        this.data = data;
     }
 
     public Message(Result result, int code, String data) {
         this.result = result;
         this.code = code;
+        this.data = data;
+    }
+
+    public Message(Result result, String data) {
+        this.result = result;
         this.data = data;
     }
 
