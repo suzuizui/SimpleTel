@@ -1,17 +1,19 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.sq.domain;
 
+import com.sq.domain.enums.Code;
 import com.sq.domain.enums.Result;
 
 import java.io.Serializable;
 
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Result result;
+    /**
+     * @see com.sq.domain.enums.Result
+     */
+    private int result;
+    /**
+     * @see com.sq.domain.enums.Code
+     */
     private int code;
     private String data;
 
@@ -19,32 +21,27 @@ public class Message implements Serializable {
     public Message() {
     }
 
-    public Message(Result result, int code) {
+    public Message(int result, int code) {
         this.result = result;
         this.code = code;
     }
 
-    public Message(Result result, Integer code) {
-        this.result = result;
-        this.code = code.intValue();
-    }
-
-    public Message(Result result, int code, String data) {
+    public Message(int result, int code, String data) {
         this.result = result;
         this.code = code;
         this.data = data;
     }
 
-    public Message(Result result, String data) {
+    public Message(int result, String data) {
         this.result = result;
         this.data = data;
     }
 
-    public Result getResult() {
+    public int getResult() {
         return this.result;
     }
 
-    public void setResult(Result result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -62,5 +59,13 @@ public class Message implements Serializable {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public boolean isHeartBreak() {
+        return code == Code.HeartBeat.getValue();
+    }
+
+    public boolean isSuccess() {
+        return result == Result.SUCCESS.getValue();
     }
 }

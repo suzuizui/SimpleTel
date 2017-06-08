@@ -1,37 +1,30 @@
 package com.sq.common.util;
 
 import com.sq.domain.Message;
-import com.sq.domain.enums.*;
+import com.sq.domain.enums.Code;
+import com.sq.domain.enums.Result;
 
 /**
  * Created by qishang on 2017/6/8.
  */
 public class MessageUtil {
+    public static Message HeartBeat(boolean flag) {
+        return get(Code.HeartBeat, flag, "");
+    }
+
     public static Message success(String data) {
-        return new Message(Result.SUCCESS, Code.SUCCESS.getValue(), data);
+        return get(Code.COOMME, true, data);
     }
 
-    public static Message success() {
-        return success("");
+    public static Message fail(String data) {
+        return get(Code.COOMME, false, data);
     }
 
-    public static Message failed(int code) {
-        return new Message(Result.FAILED, code);
-    }
-
-    public static Message failed(int code, String msg) {
-        return new Message(Result.FAILED, Integer.valueOf(code), msg);
-    }
-
-    public static Message error() {
-        return new Message(Result.FAILED, "");
-    }
-
-    public static Message error(int code) {
-        return new Message(Result.FAILED, code);
-    }
-
-    public static boolean isSuccess(Message message) {
-        return Result.SUCCESS.equals(message.getResult());
+    private static Message get(Code code, boolean flag, String data) {
+        if (flag) {
+            return new Message(Result.SUCCESS.getValue(), code.getValue(), data);
+        } else {
+            return new Message(Result.FAILED.getValue(), code.getValue(), data);
+        }
     }
 }

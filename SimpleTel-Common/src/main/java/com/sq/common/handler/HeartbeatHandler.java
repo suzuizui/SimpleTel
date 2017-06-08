@@ -1,9 +1,11 @@
 package com.sq.common.handler;
 
+import com.sq.common.cache.ChannelCache;
+import com.sq.common.util.MessageUtil;
 import com.sq.domain.Message;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -18,7 +20,9 @@ public class HeartbeatHandler extends SimpleChannelInboundHandler<Message> {
         if (evt instanceof IdleStateEvent) {
             IdleState state = ((IdleStateEvent) evt).state();
             if (state == IdleState.READER_IDLE) {
-                throw new Exception("idle exception");
+                Channel channel = ctx.channel();
+                ChannelCache.remove(channel);
+                channel.close();
             }
         } else {
             super.userEventTriggered(ctx, evt);
@@ -27,12 +31,16 @@ public class HeartbeatHandler extends SimpleChannelInboundHandler<Message> {
 
     /**
      * 拦截心跳包
+     *
      * @param ctx
      * @param msg
      * @throws Exception
      */
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Message msg) throws Exception {
+        if (msg.isHeartBreak()) {
+            ctx.writeAndFlush(MessageUtil.HeartBeat(true));
+        }
         super.channelRead(ctx, msg);
     }
 }

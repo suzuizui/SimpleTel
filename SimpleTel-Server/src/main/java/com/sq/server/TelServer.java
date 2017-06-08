@@ -1,6 +1,7 @@
 package com.sq.server;
 
 import com.sq.common.factory.NamedThreadFactory;
+import com.sq.common.handler.HeartbeatHandler;
 import com.sq.common.handler.TelDecoder;
 import com.sq.common.handler.TelEncoder;
 import com.sq.common.handler.TelHandler;
@@ -12,9 +13,12 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -60,6 +64,8 @@ public class TelServer implements InitializingBean {
                             channel.pipeline()
                                     .addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4))
                                     .addLast("frameEncoder", new LengthFieldPrepender(4))
+                                    .addLast("heartbeat",new IdleStateHandler(1,5,5, TimeUnit.SECONDS))
+                                    .addLast("heartbeatHandler",new HeartbeatHandler())
                                     .addLast(new TelEncoder())
                                     .addLast(new TelDecoder())
                                     .addLast(new TelHandler());

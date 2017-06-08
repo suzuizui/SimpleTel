@@ -6,8 +6,8 @@
 package com.sq.domain.enums;
 
 public enum Code {
-    SUCCESS(200),
-    FAIL(300);
+    HeartBeat(200),
+    COOMME(300);
 
     private int value;
 
