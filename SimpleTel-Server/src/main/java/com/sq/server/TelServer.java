@@ -64,10 +64,10 @@ public class TelServer implements InitializingBean {
                             channel.pipeline()
                                     .addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4))
                                     .addLast("frameEncoder", new LengthFieldPrepender(4))
-                                    .addLast("heartbeat",new IdleStateHandler(1,5,5, TimeUnit.SECONDS))
-                                    .addLast("heartbeatHandler",new HeartbeatHandler())
                                     .addLast(new TelEncoder())
                                     .addLast(new TelDecoder())
+                                    .addLast("heartbeat", new IdleStateHandler(1, 5, 5, TimeUnit.SECONDS))
+                                    .addLast("heartbeatHandler", new HeartbeatHandler())
                                     .addLast(new TelHandler());
                         }
                     })
