@@ -1,6 +1,8 @@
 package com.sq.common.handler;
 
+import com.sq.common.cache.ChannelCache;
 import com.sq.domain.Message;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -9,7 +11,15 @@ import io.netty.channel.SimpleChannelInboundHandler;
  */
 public class TelHandler extends SimpleChannelInboundHandler<Message> {
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, final Message msg) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        Channel channel = ctx.channel();
+        if (!ChannelCache.contains(channel)) {
+            ChannelCache.add(channel);
+        }
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, final Message msg) throws Exception {
 
     }
 
