@@ -16,11 +16,6 @@ import io.netty.handler.timeout.IdleStateEvent;
 @ChannelHandler.Sharable
 public class HeartbeatHandler extends SimpleChannelInboundHandler<HeartBreak> {
 
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        ChannelCache.remove(ctx.channel());
-        super.channelInactive(ctx);
-    }
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {

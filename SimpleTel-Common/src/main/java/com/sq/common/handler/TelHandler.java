@@ -22,6 +22,11 @@ public class TelHandler extends SimpleChannelInboundHandler<TelRequest> {
     }
 
     @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        ChannelCache.remove(ctx.channel());
+        super.channelInactive(ctx);
+    }
+    @Override
     protected void channelRead0(ChannelHandlerContext ctx, final TelRequest msg) throws Exception {
         ctx.writeAndFlush(new TelResponse());
     }
