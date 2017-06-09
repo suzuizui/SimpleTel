@@ -64,6 +64,14 @@
             </dependency>
             <!--netty end-->
 
+            <!--hessian-->
+            <dependency>
+                <groupId>com.caucho</groupId>
+                <artifactId>hessian</artifactId>
+                <version>4.0.7</version>
+            </dependency>
+            <!--hessian end-->
+
             <!-- test -->
             <dependency>
                 <groupId>junit</groupId>
