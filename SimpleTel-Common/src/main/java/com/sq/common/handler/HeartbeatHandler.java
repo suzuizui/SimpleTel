@@ -2,6 +2,7 @@ package com.sq.common.handler;
 
 import com.sq.common.cache.ChannelCache;
 import com.sq.common.remote.message.HeartBreak;
+import com.sq.common.util.ChannelUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,6 +15,13 @@ import io.netty.handler.timeout.IdleStateEvent;
  */
 @ChannelHandler.Sharable
 public class HeartbeatHandler extends SimpleChannelInboundHandler<HeartBreak> {
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        ChannelCache.remove(ctx.channel());
+        super.channelInactive(ctx);
+    }
+
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
