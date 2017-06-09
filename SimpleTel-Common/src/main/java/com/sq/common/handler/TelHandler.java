@@ -1,7 +1,7 @@
 package com.sq.common.handler;
 
 import com.sq.common.cache.ChannelCache;
-import com.sq.domain.Message;
+import com.sq.common.remote.message.TelRequest;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -9,7 +9,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 /**
  * Created by qishang on 2017/6/8.
  */
-public class TelHandler extends SimpleChannelInboundHandler<Message> {
+public class TelHandler extends SimpleChannelInboundHandler<TelRequest> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
@@ -19,7 +19,7 @@ public class TelHandler extends SimpleChannelInboundHandler<Message> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, final Message msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, final TelRequest msg) throws Exception {
 
     }
 
