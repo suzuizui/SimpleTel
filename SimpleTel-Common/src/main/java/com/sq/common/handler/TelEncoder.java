@@ -3,12 +3,9 @@ package com.sq.common.handler;
 import com.sq.common.remote.message.TelMessage;
 import com.sq.common.remote.protocol.TelProtocol;
 import com.sq.common.util.ChannelUtil;
-import com.sq.common.util.HeaderUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
-
-import java.nio.ByteBuffer;
 
 /**
  * Created by qishang on 2017/6/8.
