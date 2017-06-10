@@ -4,7 +4,6 @@ import com.sq.common.cache.ChannelCache;
 import com.sq.common.remote.message.TelRequest;
 import com.sq.common.remote.message.TelResponse;
 import com.sq.common.util.ChannelUtil;
-import com.sun.javaws.CacheUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

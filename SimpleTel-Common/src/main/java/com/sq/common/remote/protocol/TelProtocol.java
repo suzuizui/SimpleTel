@@ -8,7 +8,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 /**
  * Created by qishang on 2017/6/9.
